@@ -5,7 +5,7 @@
   "main": "dev-test.js",
   "scripts": {
     "test": "jest --watchAll",
-    "dev-test":"nodemon dev-test"
+    "dev-test": "nodemon dev-test"
   },
   "keywords": [
     "block-chain",

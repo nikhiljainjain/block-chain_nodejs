@@ -4,7 +4,7 @@ describe('block', ()=>{
     let block, lastBlock, data;
     
     beforeEach(()=>{
-        data = "Hello Unknown";
+        data = 'Hello Unknown';
         lastBlock = Block.genesis();
         block = Block.mineBlock(lastBlock, data);
         

@@ -18,11 +18,11 @@ class Block
         `;
     }
     
-    static genesis(){
+    static genesis() {
         return new this('Some thing', '------', 'f1r57 ha5h', []);
     }
     
-    static mineBlock(lastBlock, data){
+    static mineBlock(lastBlock, data) {
         const lastHash = lastBlock.hash;
         const timestamp = Date.now();
         const hash = Block.hash(timestamp, lastHash, data);
@@ -30,10 +30,14 @@ class Block
         return new this(timestamp, lastHash, hash, data);
     }
     
-    static hash(timestamp, lastHash, data){
+    static hash(timestamp, lastHash, data) {
         return SHA256(`${timestamp}${lastHash}${data}`).toString();
     }
-    
+
+    genHash(block) {
+        const {timestamp, data, lastHash} = block;
+        return Block.hash(timestamp, lastHash, data);
+    }
 }
 
 module.exports = Block;
