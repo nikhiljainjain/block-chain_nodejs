@@ -1,0 +1,23 @@
+{
+  "name": "block-chain",
+  "version": "1.0.0",
+  "description": "learning project",
+  "main": "dev-test.js",
+  "scripts": {
+    "test": "jest --watchAll",
+    "dev-test":"nodemon dev-test"
+  },
+  "keywords": [
+    "block-chain",
+    "nodejs"
+  ],
+  "author": "nikhil jain",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.7.1",
+    "nodemon": "latest"
+  },
+  "dependencies": {
+    "crypto-js": "^3.1.9-1"
+  }
+}
