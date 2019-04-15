@@ -5,7 +5,9 @@
   "main": "dev-test.js",
   "scripts": {
     "test": "jest --watchAll",
-    "dev-test": "nodemon dev-test"
+    "dev-test": "nodemon dev-test",
+    "start": "node ./app/bin/www",
+    "dev": "nodemon ./app/bin/www"
   },
   "keywords": [
     "block-chain",
@@ -18,6 +20,12 @@
     "nodemon": "latest"
   },
   "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
     "crypto-js": "^3.1.9-1"
   }
 }
