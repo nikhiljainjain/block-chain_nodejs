@@ -20,7 +20,7 @@ class Blockchain
             const block = chain[i];
             const lastBlock = chain[i-1];
 
-            if (block.lastHash !== lastBlock.hash || block.hash !== block.genHash(block)) return false;
+            if (block.lastHash !== lastBlock.hash || block.hash !== Block.genHash(block)) return false;
         }
 
         return true;

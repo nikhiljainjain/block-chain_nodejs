@@ -4,8 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var indexRouter = require('./routes/index');
+//var usersRouter = require('./routes/users');
+
+const P2pServer = require('./p2p-server');
+const Blockchain = require('../blockchain');
+const bc = new Blockchain();
+const p2pServer = new P2pServer(bc);
+const HTTP_PORT = process.env.HTTP_PORT || 3001;
 
 var app = express();
 
@@ -19,8 +25,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.get('/block', (req, res)=>{
+  res.json(bc.chain);
+});
+
+app.post('/mine', (req, res)=>{
+  const nwBlock = bc.addBlock(req.body.data);
+  console.log(`New block added  ${nwBlock.toString()}`);
+  p2pServer.syncChain();
+  res.redirect('/block');
+});
+
+/*app.use('/', indexRouter);
+app.use('/users', usersRouter);*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,4 +55,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+app.listen(HTTP_PORT, () => console.log(`Listening on Port ${HTTP_PORT}`));
+p2pServer.listen();
+//module.exports = app;

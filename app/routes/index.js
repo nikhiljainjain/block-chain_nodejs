@@ -14,7 +14,7 @@ router.get('/block', (req, res, next)=>{
 
 router.post('/mine', (req, res, next)=>{
   const nwBlock = bc.addBlock(req.body.data);
-  console.log(`New block added to chain ${nwBlock.toString()}`);
+  console.log(`New block added  ${nwBlock.toString()}`);
 
   res.redirect('/block');
 });

@@ -34,9 +34,9 @@ class Block
         return SHA256(`${timestamp}${lastHash}${data}`).toString();
     }
 
-    genHash(block) {
+    static genHash(block) {
         const {timestamp, data, lastHash} = block;
-        return Block.hash(timestamp, lastHash, data);
+        return  Block.hash(timestamp, lastHash, data);
     }
 }
 
