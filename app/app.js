@@ -26,6 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/block', (req, res)=>{
+  console.log(bc.chain);
   res.json(bc.chain);
 });
 

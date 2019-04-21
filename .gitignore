@@ -62,3 +62,6 @@ typings/
 
 #config file
 config*
+
+#idea folder
+.idea

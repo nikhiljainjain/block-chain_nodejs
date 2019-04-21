@@ -4,6 +4,7 @@ class Blockchain
 {
     constructor(){
         this.chain = [Block.genesis()];
+        //console.log(this.chain);
     }
     
     addBlock(data) {
@@ -14,7 +15,7 @@ class Blockchain
     }
 
     isValidChain(chain) {
-        if (JSON.stringify(chain[0]) !== JSON.stringify(this.chain[0])) return false;
+        if (JSON.stringify(chain[0]) !== JSON.stringify(/*Block.genesis()*/this.chain[0])) return false;
 
         for (let i=1;i<chain.length;i++){
             const block = chain[i];
@@ -27,6 +28,7 @@ class Blockchain
     }
 
     replaceChain(chain) {
+        //console.log(chain.length, this.chain.length);
         if (chain.length <= this.chain.length) {
             console.log('Given chain length is not greater than existing chain');
             return;
