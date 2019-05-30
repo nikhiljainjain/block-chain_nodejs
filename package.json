@@ -7,7 +7,11 @@
     "test": "jest --watchAll",
     "dev-test": "nodemon dev-test",
     "start": "node --harmony ./app/bin/www",
-    "dev": "nodemon ./app/app.js"
+    "dev": "nodemon ./app/app.js",
+    "dev_t": "HTTP_PORT=3002 P2P_PORT=5002 PEERS=ws://localhost:5001/ npm run dev"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "keywords": [
     "block-chain",
