@@ -7,7 +7,7 @@ describe('TransactionPool', ()=>{
 
     beforeEach(()=>{
         wallet = new Wallet();
-        tp = new tp();
+        tp = new TransactionPool();
         transaction = new Transaction();
         transaction = Transaction.newTransaction(wallet, 'unknown', 37);
         tp.updateOrAddTransaction(transaction);

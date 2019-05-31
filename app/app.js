@@ -9,8 +9,13 @@ var logger = require('morgan');
 
 const P2pServer = require('./p2p-server');
 const Blockchain = require('../blockchain');
+const Wallet = require('../wallet');
+const TransactionPool = require('../wallet/transaction-pool');
+
 const bc = new Blockchain();
-const p2pServer = new P2pServer(bc);
+const wallet = new Wallet();
+const tp = new TransactionPool();
+const p2pServer = new P2pServer(bc, tp);
 const HTTP_PORT = process.env.HTTP_PORT || 3001;
 
 var app = express();
@@ -34,7 +39,22 @@ app.post('/mine', (req, res)=>{
   const nwBlock = bc.addBlock(req.body.data);
   console.log(`New block added  ${nwBlock.toString()}`);
   p2pServer.syncChain();
-  res.redirect('/block');
+  res.status(302).redirect('/block');
+});
+
+app.get('/transaction', (req, res)=>{
+  res.json(tp.transactions);
+});
+
+app.post('/transact', (req, res)=>{
+  const { recepient, amount } = req.body;
+  const transaction = wallet.createTransaction(recepient, amount, tp);
+  p2pServer.broadcastTransaction(transaction);
+  res.status(302).redirect('/transaction');
+});
+
+app.get('/public-key', (req, res)=>{
+  res.json({publicKey: wallet.publicKey});
 });
 
 /*app.use('/', indexRouter);
