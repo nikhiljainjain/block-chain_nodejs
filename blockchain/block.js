@@ -1,5 +1,5 @@
 const ChainUtil = require('../chain-util');
-const {DIFFICULTLY, MINE_RATE} = require('../config');
+const { DIFFICULTY, MINE_RATE } = require('../config');
 
 class Block
 {
@@ -9,7 +9,7 @@ class Block
         this.hash = hash;
         this.data = data;
         this.nonce = nonce;
-        this.difficulty = difficulty || DIFFICULTLY;
+        this.difficulty = difficulty || DIFFICULTY;
     }
 
     toString(){
@@ -24,7 +24,7 @@ class Block
     }
     
     static genesis() {
-        return new this("Genesis Block", '------', 'f1r5t block', [], 0, DIFFICULTLY);
+        return new this("Genesis Block", '------', 'f1r5t block', [], 0, DIFFICULTY);
     }
     
     static mineBlock(lastBlock, data) {
