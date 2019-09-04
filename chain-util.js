@@ -17,6 +17,7 @@ class ChainUtil {
     }
 
     static verifySignature(publicKey, signature, dataHash) {
+        //const x = ec.keyFromPublic(publicKey, 'hex').verify(dataHash, signature); 
         return ec.keyFromPublic(publicKey, 'hex').verify(dataHash, signature);
     }
 }

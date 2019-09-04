@@ -6,6 +6,7 @@ class Transaction {
         this.id = ChainUtil.id();
         this.input = null;
         this.output = [];
+        //console.log(this);
     }
 
     update(senderWallet, recepient, amount) {
@@ -62,7 +63,7 @@ class Transaction {
             transaction.input.address,
             transaction.input.signature,
             ChainUtil.hash(transaction.output)
-        );
+        ); 
     }
 }
 

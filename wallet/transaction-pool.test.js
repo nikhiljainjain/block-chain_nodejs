@@ -1,14 +1,16 @@
 const TransactionPool= require('./transaction-pool');
 const Transaction = require('./transaction');
 const Wallet = require('./index');
+const Blockchain = require('../blockchain');
 
 describe('TransactionPool', ()=>{
-    let wallet, transaction, tp;
+    let wallet, transaction, tp, bc;
 
     beforeEach(()=>{
+        bc = new Blockchain();
         wallet = new Wallet();
         tp = new TransactionPool();
-        transaction = wallet.createTransaction('unknown', 37, tp);
+        transaction = wallet.createTransaction('unknown', 37, bc, tp);
     });
 
     it('adding transaction to the pool', ()=>{
@@ -24,6 +26,11 @@ describe('TransactionPool', ()=>{
             .not.toEqual(oldTransaction);
     });
 
+    it('clear transactions', ()=>{
+        tp.clear();
+        expect(tp.transactions).toEqual([]);
+    });
+
     describe('mixing of valid and corrupt transaction ', ()=>{
         let validTransaction;
 
@@ -31,7 +38,7 @@ describe('TransactionPool', ()=>{
             validTransaction = [...tp.transactions];
             for (let i=0;i<6;i++){
                 wallet = new Wallet();
-                transaction = wallet.createTransaction('unknown', 37, tp);
+                transaction = wallet.createTransaction('unknown', 37, bc, tp);
                 if (i%2==0)
                     transaction.input.amount = 9993;
                 else    
