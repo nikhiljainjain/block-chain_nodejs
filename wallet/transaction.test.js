@@ -14,12 +14,12 @@ describe('transaction testing', ()=>{
 
     it('output the `amount` should transferred from sender wallet', ()=>{
         //console.log(transaction.output.find(output => output.address == wallet.publicKey));
-        expect(transaction.output.find(output => output.address == wallet.publicKey).amount)
+        expect(transaction.outputs.find(output => output.address == wallet.publicKey).amount)
             .toEqual(wallet.balance - amount);
     });
 
     it('output the `amount` should transfer to recipient', ()=>{
-        expect(transaction.output.find(output => output.address === recipient).amount).toEqual(amount);
+        expect(transaction.outputs.find(output => output.address === recipient).amount).toEqual(amount);
     });
 
     it('input the balance of the wallet', ()=>{
@@ -31,7 +31,7 @@ describe('transaction testing', ()=>{
     });
 
     it('invalidating the transaction', ()=>{
-        transaction.output[0].amount = 999999;
+        transaction.outputs[0].amount = 999999;
         expect(Transaction.verifyTransaction(transaction)).toBe(false);
     });
 
@@ -57,12 +57,12 @@ describe('transaction testing', ()=>{
         });
 
         it('subtracting amount from sender wallet for next transaction', ()=>{
-            expect(transaction.output.find(output => output.address === wallet.publicKey).amount)
+            expect(transaction.outputs.find(output => output.address === wallet.publicKey).amount)
                 .toEqual(wallet.balance - amount - nextAmount);
         });
 
         it('Adding amount to new recepient  wallet', ()=>{
-            expect(transaction.output.find(output => output.address === nextRecepient).amount)
+            expect(transaction.outputs.find(output => output.address === nextRecepient).amount)
                 .toEqual(nextAmount);
         });
     });
@@ -74,7 +74,7 @@ describe('transaction testing', ()=>{
         });
 
         it('reward the miner wallet', ()=>{
-            expect(transaction.output.find( o => o.address === wallet.publicKey).amount).toEqual(MINING_REWARD);
+            expect(transaction.outputs.find( o => o.address === wallet.publicKey).amount).toEqual(MINING_REWARD);
         });
 
     });

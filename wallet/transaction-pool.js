@@ -19,10 +19,10 @@ class TransactionPool {
         return this.transactions.find(t => t.input.address === address);
     }
 
-    validTransaction(){
+    validTransactions(){
         //console.log(this.transactions);
         return this.transactions.filter(t => {
-            const outputTotal = t.output.reduce((total, output)=>{
+            const outputTotal = t.outputs.reduce((total, output)=>{
                 //console.log(total, output.amount);
                 return total + output.amount;
             }, 0);

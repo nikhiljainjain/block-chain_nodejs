@@ -28,12 +28,12 @@ describe('Wallet', ()=>{
             });
 
             it('double of `sendAmount` dedicated from sender wallet', ()=>{
-                expect(transaction.output.find(o => o.address === wallet.publicKey).amount)
+                expect(transaction.outputs.find(o => o.address === wallet.publicKey).amount)
                     .toEqual(wallet.balance - sendAmount * 2);
             });
 
             it('double of `sendAmount` send to recepient', ()=>{
-                expect(transaction.output.filter(o => o.address === recepient)
+                expect(transaction.outputs.filter(o => o.address === recepient)
                     .map(output => output.amount))
                     .toEqual([sendAmount, sendAmount]);
             });

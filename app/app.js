@@ -41,5 +41,4 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(HTTP_PORT, () => console.log(`Listening on Port ${HTTP_PORT}`));
-p2pServer.listen();
 module.exports = app;

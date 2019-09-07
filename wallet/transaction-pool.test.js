@@ -36,7 +36,7 @@ describe('TransactionPool', ()=>{
 
         beforeEach(()=>{
             validTransaction = [...tp.transactions];
-            for (let i=0;i<6;i++){
+            for (let i=0;i<2;i++){
                 wallet = new Wallet();
                 transaction = wallet.createTransaction('unknown', 37, bc, tp);
                 if (i%2==0)
@@ -51,7 +51,7 @@ describe('TransactionPool', ()=>{
         });
 
         it('grabs valid transaction', ()=>{
-            expect(tp.validTransaction()).toEqual(validTransaction);
+            expect(tp.validTransactions()).toEqual(validTransaction);
         });
     });
 });

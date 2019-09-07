@@ -5,7 +5,7 @@ const SHA256 = require('crypto-js/sha256');
 
 class ChainUtil {
     static genKeyPair() {
-        return ec.genKeyPair();
+        return (ec.genKeyPair());
     }
 
     static id() {
@@ -13,12 +13,13 @@ class ChainUtil {
     }
 
     static hash(data) {
-        return SHA256(JSON.stringify(data)).toString();
+        return (SHA256(JSON.stringify(data)).toString());
     }
 
     static verifySignature(publicKey, signature, dataHash) {
-        //const x = ec.keyFromPublic(publicKey, 'hex').verify(dataHash, signature); 
-        return ec.keyFromPublic(publicKey, 'hex').verify(dataHash, signature);
+        /*console.log(dataHash, "\n",signature);
+        console.log(ec.keyFromPublic(publicKey, 'hex').verify(dataHash, signature));*/
+        return (ec.keyFromPublic(publicKey, 'hex').verify(dataHash, signature));
     }
 }
 

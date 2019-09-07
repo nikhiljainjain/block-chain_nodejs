@@ -38,24 +38,17 @@ class P2pServer {
     }
 
     sendChain(socket) {
-        //console.log('sendChain called');
-        socket.send(JSON.stringify({
-            type: MESSAGE_TYPE.chain,
-            chain: this.blockchain.chain
-        }));
+        socket.send(JSON.stringify({ type: MESSAGE_TYPE.chain,chain: this.blockchain.chain }));
     }
 
     sendTransaction(socket, transaction) {
-        socket.send(JSON.stringify({
-            type: MESSAGE_TYPE.transaction,
-            transaction
-        }));
+        socket.send(JSON.stringify({ type: MESSAGE_TYPE.transaction, transaction }));
     }
 
     messageHandler(socket) {
         //console.log('messageHandler called');
-        socket.on('message', msg => {
-            const data = JSON.parse(msg);
+        socket.on('message', message => {
+            const data = JSON.parse(message);
             switch (data.type) {
                 case MESSAGE_TYPE.chain:
                     this.blockchain.replaceChain(data.chain);

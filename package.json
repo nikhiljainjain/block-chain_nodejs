@@ -1,8 +1,8 @@
 {
   "name": "block-chain",
-  "version": "1.0.0",
+  "version": "0.9.1",
   "description": "learning project",
-  "main": "dev-test.js",
+  "main": "./app/app.js",
   "scripts": {
     "test": "jest --watchAll",
     "dev-test": "nodemon dev-test",
@@ -15,10 +15,9 @@
   },
   "keywords": [
     "block-chain",
-    "nodejs"
+    "nodejs"," cryptocurrency"
   ],
-  "author": "nikhil jain",
-  "license": "ISC",
+  "author": "NIKHIL JAIN",
   "devDependencies": {
     "jest": "^24.7.1",
     "nodemon": "latest"
