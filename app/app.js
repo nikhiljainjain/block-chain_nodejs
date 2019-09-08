@@ -7,7 +7,7 @@ let logger = require('morgan');
 let indexRouter = require('./routes/index');
 let pageRouter = require('./routes/page');
 
-const HTTP_PORT = process.env.HTTP_PORT || 3001;
+const HTTP_PORT = process.env.PORT || 3001; //http port
 
 let app = express();
 
@@ -40,5 +40,5 @@ app.use(function(err, req, res, next) {
 	res.render('error');
 });
 
-app.listen(HTTP_PORT, () => console.log(`Listening on Port ${HTTP_PORT}`));
+app.listen(HTTP_PORT, () => console.log(`Listening HTTP request on Port ${HTTP_PORT}`));
 module.exports = app;

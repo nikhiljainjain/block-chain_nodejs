@@ -7,8 +7,8 @@
     "test": "jest --watchAll",
     "dev-test": "nodemon dev-test",
     "dev": "nodemon ./app/app.js",
-    "dev_t": "HTTP_PORT=3002 P2P_PORT=5002 PEERS=ws://localhost:5001/ npm run dev",
-    "start": "node --harmony ./app/app.js"
+    "dev_t": "PORT=3002 P2P_PORT=5002 PEERS=ws://localhost:5001/ npm run dev",
+    "start": "node ./app/app.js"
   },
   "jest": {
     "testEnvironment": "node"
