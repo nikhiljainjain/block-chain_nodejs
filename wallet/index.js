@@ -25,7 +25,7 @@ class Wallet {
 
         if (amount > this.balance) {
            console.log(`Amount: ${amount} is greater than your ${this.balance}`);
-           return;
+           return `Amount: ${amount} is greater than your ${this.balance}`;
        }
 
        let transaction = transactionPool.existingTransaction(this.publicKey);

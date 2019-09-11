@@ -26,27 +26,34 @@ router.get('/transactions', (req, res)=>{
 	res.json(tp.transactions);
 });
 
+router.get('/public-key', (req, res)=>{
+	res.json({publicKey: wallet.publicKey});
+});
+
+wallet.balance = wallet.calculateBalance(bc);
+
+router.get('/balance', (req, res)=>{
+	res.json({balance : wallet.balance});
+});
+
 router.get('/mine-transactions', (req, res)=>{
 	const block = miner.mine();
 	console.log(`New block added: ${block}`);
 	res.status(302).redirect('/blocks');
 });
 
-router.get('/public-key', (req, res)=>{
-	res.json({publicKey: wallet.publicKey});
-});
-
 router.get('/balance', (req, res)=>{
-    const balance = wallet.calculateBalance(bc);
-    res.json({'Balance' : balance});
+    res.json({'Balance' : wallet.balance});
 });
 
 router.post('/transact', (req, res)=>{
 	const { recipient, amount } = req.body;
 	const transaction = wallet.createTransaction(recipient, amount, bc, tp);
-	//console.log(transaction);
-	p2pServer.broadcastTransaction(transaction);
-	res.status(302).redirect('/transactions');
+	if(typeof(transaction) === 'object'){
+		p2pServer.broadcastTransaction(transaction);
+		res.status(302).redirect('/transactions');
+	}else
+		res.json({msg: transaction});
 });
 
 router.post('/mine', (req, res)=>{

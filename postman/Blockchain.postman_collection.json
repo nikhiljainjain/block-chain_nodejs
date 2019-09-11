@@ -16,7 +16,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "localhost:3001/public-key",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"public-key"
+					]
 				}
 			},
 			"response": []
@@ -31,7 +38,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "localhost:3001/blocks",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"blocks"
+					]
 				}
 			},
 			"response": []
@@ -50,7 +64,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"recipient\": \"Mr. X\",\n\t\"amount\":23\n}"
+					"raw": "{\n\t\"recipient\": \"mr-devHack\",\n\t\"amount\": 51\n}"
 				},
 				"url": {
 					"raw": "localhost:3001/transact",
@@ -75,7 +89,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "localhost:3001/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"transactions"
+					]
 				}
 			},
 			"response": []
@@ -83,11 +104,40 @@
 		{
 			"name": "Mine block",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/mine-transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"mine-transactions"
+					]
+				},
+				"description": "Miner will add new block to blockchain"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Data block",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "data",
+							"value": "my name is DevHack",
+							"type": "text"
+						}
+					]
 				},
 				"url": {
 					"raw": "localhost:3001/mine",
@@ -99,7 +149,30 @@
 						"mine"
 					]
 				},
-				"description": "Miner will add new block to blockchain"
+				"description": "Direct adding data to block and mine it -> iot"
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/balance",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"balance"
+					]
+				},
+				"description": "Current balance of your wallet without any identity"
 			},
 			"response": []
 		}

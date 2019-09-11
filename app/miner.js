@@ -16,6 +16,7 @@ class Miner{
 
 	mine(){
 		const validTransactions = this.transactionPool.validTransactions();
+		console.log(validTransactions[0], "\nTransaction array and type\n", typeof(validTransactions[0]));
 		//include a reward for the miner
 		validTransactions.push(Transaction.rewardTransaction(this.wallet, Wallet.blockchainWallet()));
 		//create a block consisting of the valid transactions
