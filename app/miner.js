@@ -9,18 +9,19 @@ class Miner{
 		this.p2pServer = p2pServer;
 	}
 
-	transactionFees(senderWallet){
+	/*transactionFees(senderWallet){
 		//new transaction from sender wallet to miner wallet
 		const fees = this.Transaction.newTransaction(senderWallet, this.wallet, 1);
-	}
+	}*/
 
-	mine(){
+	mine(senderWallet){
 		const validTransactions = this.transactionPool.validTransactions();
-		console.log(validTransactions[0], "\nTransaction array and type\n", typeof(validTransactions[0]));
+		//extracting transaction that done by senderwallet
+		const senderTransactions = this.transactionPool.extractTransactions(senderWallet, validTransactions);
 		//include a reward for the miner
-		validTransactions.push(Transaction.rewardTransaction(this.wallet, Wallet.blockchainWallet()));
+		senderTransactions.push(Transaction.rewardTransaction(this.wallet, Wallet.blockchainWallet()));
 		//create a block consisting of the valid transactions
-		const block = this.blockchain.addBlock(validTransactions);
+		const block = this.blockchain.addBlock(senderTransactions);
 		//synchronize the chains  in the peer-to-peer server
 		this.p2pServer.syncChain();
 		//clear the local transaction pool

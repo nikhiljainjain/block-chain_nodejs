@@ -41,6 +41,14 @@ class TransactionPool {
         });
     }
     
+    extractTransactions(senderWallet, transactions){
+        let position = 
+         transactions.filter(t => {
+            if (t.input.address === senderWallet.publicKey)
+                return t;
+        });
+    }
+
     clear(){
         this.transactions = [];
     }

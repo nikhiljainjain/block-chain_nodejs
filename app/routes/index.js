@@ -37,7 +37,7 @@ router.get('/balance', (req, res)=>{
 });
 
 router.get('/mine-transactions', (req, res)=>{
-	const block = miner.mine();
+	const block = miner.mine(wallet);
 	console.log(`New block added: ${block}`);
 	res.status(302).redirect('/blocks');
 });

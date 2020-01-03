@@ -1,7 +1,7 @@
 const Wallet = require('./index');
 const TransactionPool = require('./transaction-pool');
 const Blockchain = require('../blockchain');
-const { INITIAL_BALANCE } = require('../config');
+const { INITIAL_BALANCE, TRANSACTION_FEES } = require('../config');
 
 describe('Wallet', ()=>{
     let wallet, tp, bc;
@@ -29,7 +29,7 @@ describe('Wallet', ()=>{
 
             it('double of `sendAmount` dedicated from sender wallet', ()=>{
                 expect(transaction.outputs.find(o => o.address === wallet.publicKey).amount)
-                    .toEqual(wallet.balance - sendAmount * 2);
+                    .toEqual(wallet.balance - (2*sendAmount  + TRANSACTION_FEES));
             });
 
             it('double of `sendAmount` send to recepient', ()=>{
@@ -60,7 +60,7 @@ describe('Wallet', ()=>{
         });
 
         it('calculating the balance for the blockchain transaction matching the sender', ()=>{
-            expect(senderWallet.calculateBalance(bc)).toEqual(INITIAL_BALANCE - (addBalance * repeatAdd));
+            expect(senderWallet.calculateBalance(bc)).toEqual(INITIAL_BALANCE - (addBalance * repeatAdd + TRANSACTION_FEES));
         });
 
         describe('and recipient conducts a transactions', ()=>{
@@ -83,7 +83,7 @@ describe('Wallet', ()=>{
                 })
 
                 it('calculate the recipient balance only using transactions since its most recent one', ()=>{
-                    expect(wallet.calculateBalance(bc)).toEqual(recipientBalance - subtractBalance + addBalance);
+                    expect(wallet.calculateBalance(bc)).toEqual(recipientBalance - subtractBalance + addBalance - TRANSACTION_FEES);
                 });
             })
         });
